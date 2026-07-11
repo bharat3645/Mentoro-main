@@ -72,7 +72,7 @@ cd ai-companion-quest
 npm install
 
 # Install backend dependencies
-npm run backend:install
+cd backend && pip install -r requirements.txt && cd ..
 ```
 
 ### 3. Environment Setup
@@ -100,13 +100,15 @@ OPENAI_API_KEY=your_openai_api_key (optional)
 3. Enable Row Level Security in your Supabase dashboard
 
 ### 5. Start Development Servers
-```bash
-# Start both frontend and backend
-npm run start
 
-# Or start them separately:
-npm run dev          # Frontend only
-npm run backend      # Backend only
+> Note: this scaffold's `package.json` defines only `dev`, `build`, `lint`, and `preview` scripts, so the frontend and backend are started in separate terminals.
+
+```bash
+# Terminal 1 — frontend (Vite)
+npm run dev
+
+# Terminal 2 — backend (FastAPI)
+cd backend && python main.py
 ```
 
 ### 6. Access the Application
@@ -178,16 +180,10 @@ ai-companion-quest/
 - Add proper error handling and loading states
 - Include accessibility features (ARIA labels, keyboard navigation)
 
-### Testing
+### Linting
 ```bash
-# Run frontend tests
-npm run test
-
-# Run backend tests
-cd backend && python -m pytest
-
-# Type checking
-npm run type-check
+# Lint the frontend (no test or type-check scripts are defined in this scaffold)
+npm run lint
 ```
 
 ## 🚀 Deployment
@@ -197,8 +193,7 @@ npm run type-check
 # Build for production
 npm run build
 
-# Deploy to Netlify
-npm run deploy
+# Deploy the generated dist/ folder with your hosting platform's CLI or Git integration
 ```
 
 ### Backend Deployment (Railway/Heroku)
@@ -282,7 +277,7 @@ The backend API is fully documented with OpenAPI/Swagger. Access the interactive
 curl http://localhost:8000/health
 
 # Restart backend
-npm run backend
+cd backend && python main.py
 ```
 
 **Supabase Connection Issues**
